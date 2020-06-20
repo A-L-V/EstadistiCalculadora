@@ -1,0 +1,23 @@
+table{
+     width: 100%;
+     border: 1px;
+     border: solid;
+     border-collapse: collapse;
+     border-color: teal;
+}
+td{
+     border: 1px;
+     border: solid;
+     border-collapse: collapse;
+     padding: 5px;
+     text-align: center;
+     border-color: teal;
+}
+th{
+     border: 1px;
+     border: solid;
+     border-collapse: collapse;
+     padding: 5px;
+     text-align: center;
+     border-color: teal;
+}

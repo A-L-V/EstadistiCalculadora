@@ -1,0 +1,43 @@
+<html style="background-color: black;">
+     <head>
+       <meta charset="utf-8"/>
+       <link rel="stylesheet" href="proyecto.css"/>
+     </head>
+     <body style="color: white;"> 
+          <div><p>
+               <input type="button" value="Datos no agrupados" onclick="noAgrupados()" />
+               <input type="button" value="Datos agrupados" onclick="agrupados()"/>
+          </p>
+          <div id= "divAgrupados" >
+               <input type="button" value= "+ interval" class="interval"/>
+               <input type="button" value= "- interval" class="interval"/><br/>
+               <table id = table>
+                    <tr class = "">
+                         <th>Intervalos</th>
+                         <th>frecuencia</th>
+                         <th>frecuencia absoluta</th>
+                    </tr>
+                    <tr>
+                         <td> <input type="text"/></td>
+                         <td> <input type= "number"/></td>
+                         <td> </td>
+                    </tr>
+                    <tr>
+                         <td>[20-30] </td>
+                         <td>12</td>
+                         <td>12</td>
+                    </tr>
+               </table>
+          </div>
+
+          <div id="divNoAgrupados" style="display: none" />
+               Coloque los numeros,<br/>
+               por ejemplo:1,2,3,4,5, <br/>
+               <input type="text" id ="input"/>
+               <input type="button" id = "button" /><br/>
+               <a id = "output"></a>
+          </div>  
+       <script src = "proyecto.js"></script>
+       <script src = "proyecto2.js"></script>
+     </body>
+</html> 
