@@ -1,17 +1,24 @@
 function noAgrupados(){
+     let noAgrupados = document.getElementById("noAgrupados")
+     let agrupados = document.getElementById("agrupados")
+     noAgrupados.removeAttribute("onclick")
+     agrupados.setAttribute("onclick","agrupados()")
      document.getElementById("divNoAgrupados").style.display="block"
      document.getElementById("divAgrupados").style.display="none"
-
+     if(agrupados.hasAttribute("onclick")){
+          mainA();
+     }
+}
+function mainA(){
      let input = document.getElementById("input");
      let button = document.getElementById("button");
      let output = document.getElementById("output");
      button.addEventListener("click", function(){
           var datos = input.value.split(",");
-
+          
           for(let i = 0; i< datos.length; i++) datos[i]= parseFloat(datos[i]);  
-
-          datos.sort(function(prev,next) {
-          return prev - next; 
+               datos.sort(function(prev,next) {
+               return prev - next; 
           });
           media = hallarMedia(datos);
           mediana = hallarMediana(datos);

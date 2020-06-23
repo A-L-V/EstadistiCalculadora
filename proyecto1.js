@@ -1,34 +1,30 @@
 function agrupados(){
+     let noAgrupados = document.getElementById("noAgrupados")
+     let agrupados = document.getElementById("agrupados")
+     agrupados.removeAttribute("onclick")
+     noAgrupados.setAttribute("onclick","noAgrupados()")
      document.getElementById("divAgrupados").style.display="block";
      document.getElementById("divNoAgrupados").style.display="none";
-     var td = document.getElementsByClassName("td")
-     console.log(td)
-     var tr = document.getElementsByClassName("fila")
+     if(noAgrupados.hasAttribute("onclick")){
+          mainB();
+     }
+}
+
+
+function mainB(){     
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
-     var creados = 0
-     var numFilas = [];
-     var aleatorio = Math.random()*100
-     if(aleatorio > 66 && aleatorio<100){
-          console.log("a")
-     }
-     else if(aleatorio< 66 && aleatorio>33){
-          console.log("b")
-     }
-     else{
-          console.log("no el delegado")
-     }
-
-
-
+     var fila = document.getElementsByClassName("fila");
+     var td = document.getElementsByClassName("td");
+     var creados = 0;
+     var cantiTh = document.getElementsByClassName("th").length
+     var columna0 = document.getElementsByClassName("columna0")
+     var columna1 = document.getElementsByClassName("columna1")
+     var columna2 = document.getElementsByClassName("columna2")
+    
      intervalos[0].addEventListener("click",function(){
-          /*var ultimo = tr.length -1
-          tr[ultimo].appendChild(
-          */
-          var ultimo = td.length - 1
-          console.log(td[ultimo])
-          numFilas[creados] = new Filas("text",td,ultimo);
-          numFilas[creados] = new Filas("number",td,ultimo)
+          crearFila();
+          crearTd(fila,fila.length-1,td,td.length,cantiTh);
           creados++;
      })
      intervalos[1].addEventListener("click",function(){
@@ -37,50 +33,61 @@ function agrupados(){
                table.removeChild(borrar);
                creados--;
           }
-          
      })
 
+     document.getElementById("mc").addEventListener("click",function(){
+          hallarMc()
+     })
+     document.getElementById("Fi").addEventListener("click",function(){
+          
+          hallarFi(columna1,columna2)
+          
+     })
+     
+}
+function hallarMc(){
+     
 }
 
-class Filas{
-     constructor(tipoInput,td,ultimo){
-          var fila = document.createElement("tr");
-          fila.setAttribute("class","fila");
-          table.appendChild(fila);          
-          
-          var cuadro = document.createElement("td")
-          cuadro.setAttribute("class","td")
-          fila.appendChild(cuadro)
 
-          var input = document.createElement("input")
-          input.setAttribute("type",tipoInput)
-          fila.appendChild(input)
-
+function hallarFi(columna1,columna2){
+     
+     for(let i = 0; i<columna2.length;i++){
+          if(i == 0){
+               columna2[i].innerHTML = parseInt(columna1[i].value)
+          }
+          else{
+               columna2[i].innerHTML = parseInt(columna1[i].value) + parseInt(columna1[i-1].value)
+          }
      }
 }
 
 
 
-/*
-function crear(){
+function crearFila(){
      var tr = document.createElement("tr");
      tr.setAttribute("class","fila");
      table.appendChild(tr);
-     for( let i = 0; i<3;i++){
-          var td = document.createElement("td")
-          tr.appendChild(td)
-          if ( i== 0){
-               var text = document.createElement("input")
-               text.setAttribute("type","text")
-               text.setAttribute("class","columna1")
-               td.appendChild(text)
+}
+function crearTd(fila,cantFila,td,cantTd,cantiTh){
+     for(let i = 0; i <cantiTh; i++){
+          var cuadro = document.createElement("td")
+          cuadro.setAttribute("class","td")
+          fila[cantFila].appendChild(cuadro)
+          if(i == 2){
+               cuadro.setAttribute("class","columna2")
           }
-          if ( i == 1){
-               var number = document.createElement("input")
-               number.setAttribute("type","number")
-               text.setAttribute("type","columna2")
-               td.appendChild(number)
-          }
-     }    
+     }
+     for(let i = 0; i<2;i++){
+          var text = document.createElement("input")
+          text.setAttribute("type","number")
+          text.setAttribute("class","columna0")
+          td[cantTd].appendChild(text)
+     }
+     cantTd++;
+     var number = document.createElement("input")
+     number.setAttribute("type","number")
+     number.setAttribute("class","columna1")
+     td[cantTd].appendChild(number)          
 }
 /* */ 

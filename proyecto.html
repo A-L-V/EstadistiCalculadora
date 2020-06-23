@@ -3,26 +3,21 @@
        <meta charset="utf-8"/>
        <link rel="stylesheet" href="proyecto.css"/>
      </head>
-     <body style="color: white;"> 
+     <body style="color: white;" > 
           <div><p>
-               <input type="button" value="Datos no agrupados" onclick="noAgrupados()" />
-               <input type="button" value="Datos agrupados" onclick="agrupados()"/>
+               <input id="noAgrupados" onclick="noAgrupados()" type="button" value="Datos no agrupados" />
+               <input id="agrupados" onclick="agrupados()" type="button" value="Datos agrupados"/>
           </p>
-          <div id= "divAgrupados" >
+          <div id= "divAgrupados" style="display: none;">
                <input type="button" value= "+ interval" class="interval"/>
                <input type="button" value= "- interval" class="interval"/><br/>
                <table id = table>
                     <tr>
-                         <th>Intervalos,[ 0 - 50 ] </th>
-                         <th>frecuencia, 20</th>
-                         <th>frecuencia absoluta</th>
-                         <th>Marca de clase</th>
-                    </tr>
-                    <tr class ="fila">
-                         <td> <input type="text" class="columna1"/></td>
-                         <td> <input type= "number" class = "columan2" /></td>
-                         <td> </td>
-                         <td>  </td>
+                         <th class = "th" id = "primero">Intervalos,[ 0 - 50 ] </th>
+                         <th class = "th">frecuencia, 20</th>
+                         <th class = "th"><input type= "button" value="Frecuencia Absoluta: Fi" id ="Fi"  </th>
+                         <th class = "th"><input type="button" value="marca de clase" id="mc"></th>
+                         <th class = "th">f*mc</th>
                     </tr>
                </table>
           </div>
