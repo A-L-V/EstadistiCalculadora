@@ -20,4 +20,12 @@ th{
      padding: 5px;
      text-align: center;
      border-color: teal;
+     width: 20%;
+
+}
+.primero{
+     width: 30%;
+}
+tr td input {
+     width: 40%;
 }
