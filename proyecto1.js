@@ -19,6 +19,7 @@ function mainB(){
      var creados = 0;
      var media = document.getElementsByClassName("media")
      var mediana = document.getElementsByClassName("mediana")
+     var moda = document.getElementsByClassName("moda")
      var cantiTh = document.getElementsByClassName("th").length;
      var columna0 = document.getElementsByClassName("columna0");
      var columna1 = document.getElementsByClassName("columna1");
@@ -44,7 +45,12 @@ function mainB(){
      });
 
      mediana[0].addEventListener("click",function(){
-          hallarMediana(columna2[columna2.length-1],columna3,fila,columna0,columna1,mediana[1]);
+          console.log(mediana[1])
+          hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
+     })
+
+     moda[0].addEventListener("click",function(){
+          hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
      })
 
      document.getElementById("mc").addEventListener("click",function(){
@@ -70,7 +76,33 @@ function mainB(){
      
 }
 
-function hallarMediana(n,columna2,fila,columna0,columna1,mediana){
+function hallarModa(n,columna2,fila,columna0,columna1,escribirModa){
+     var posicion = (n.innerHTML)/2;
+     var a = 0
+     while(posicion > columna2[a].innerHTML){
+          a++;
+     }
+     var filaN = fila[a]
+     var limiteInferior = parseFloat(columna0[a*2].value)
+     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior 
+     var fiAnterior
+     var fiSuperior
+
+     if(a>0)  fiAnterior = columna1[a-1].value
+     else fiAnterior = 0
+
+     if(a +1 == columna1.length)     fiSuperior = 0
+     else fiSuperior = columna1[a+1].value
+
+     var d1 = columna1[a].value - fiAnterior
+     var d2 = columna1[a].value - fiSuperior
+     var moda = limiteInferior + (amplitud*(d1/(d1 + d2)))
+     escribirModa[1].innerHTML = (Math.floor(moda*100))/100
+
+}
+
+
+function hallarMediana(n,columna2,fila,columna0,columna1,escribirMediana){
      var posicion = (n.innerHTML)/2;
      var a = 0
      while(posicion > columna2[a].innerHTML  ){
@@ -78,10 +110,14 @@ function hallarMediana(n,columna2,fila,columna0,columna1,mediana){
      }
      var filaN = fila[a]
      var limiteInferior = parseFloat(columna0[a*2].value)
-     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior
-     var FiAnterior = parseFloat(columna2[a-1].innerHTML)
+     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior  
+     var FiAnterior
+     if(a > 0){
+          FiAnterior = parseFloat(columna2[a-1].innerHTML)
+     }
+     else FiAnterior = 0
      var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/parseFloat(columna1[a].value))
-     mediana[1].innerHTML = mediana
+     escribirMediana[1].innerHTML = (Math.floor(mediana*100))/100
 }
 
 function hallarMedia(columna4,mostrar,n){
