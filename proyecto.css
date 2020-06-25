@@ -1,3 +1,32 @@
+div p input{
+     text-align: center;
+     color:white;
+     background-color: darkslateblue;
+     margin-left: 25%;
+     width: 15%;
+     height: 7%;
+     font-size: 100%;
+     border-color: black;
+}
+
+
+#interval0{
+     margin-left: 2.5%;
+     margin-bottom: 0.5%;
+     background-color: rgb(255, 0, 0);
+     border-color: white;
+     color: white
+}
+
+#interval1{
+     margin-left: 2.5%;
+     margin-bottom: 0.5%;
+     background-color: black;
+     color: white;
+     border-color: white;
+}
+
+
 table{
      width: 100%;
      border: 1px;
@@ -23,9 +52,7 @@ th{
      width: 20%;
 
 }
-.primero{
-     width: 30%;
-}
+
 tr td input {
      width: 40%;
 }
