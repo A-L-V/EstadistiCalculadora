@@ -8,8 +8,22 @@ div p input{
      font-size: 100%;
      border-color: black;
 }
+#input{
+     width: 50%;
+     border:2px solid #aaa;
+     border-radius: 4px;
+     margin:1%;
+     outline: 8px;
+     padding: 8px;
+     box-sizing: border-box;
+     background-color: black;
+     color: white;
+}
+#divNoAgrupados{
+     font-size: 150%;
+     text-align: center;
 
-
+}
 #interval0{
      margin-left: 2.5%;
      margin-bottom: 0.5%;

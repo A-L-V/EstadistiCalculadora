@@ -72,6 +72,7 @@ function mainB(){
           hallar_fMc(columna3,columna1,columna4)
           hallarMedia(columna4,media[1],columna2[columna2.length-1]);
           hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
+          hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
      })
      
 }
