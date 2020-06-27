@@ -16,8 +16,6 @@ function agrupados(){
                table.removeChild(borrar);
           }
      })
-<<<<<<< Updated upstream
-=======
 
      document.getElementById("mc").addEventListener("click",function(){
           hallarMc(columna0,columna3)
@@ -158,5 +156,4 @@ function crearTd(fila,cantFila,td,cantTd,cantiTh){
      number.setAttribute("type","number")
      number.setAttribute("class","columna1")
      td[cantTd].appendChild(number)          
->>>>>>> Stashed changes
 }

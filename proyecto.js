@@ -3,14 +3,6 @@ var a = 10
 function noAgrupados(){
      document.getElementById("divNoAgrupados").style.display="block"
      document.getElementById("divAgrupados").style.display="none"
-<<<<<<< Updated upstream
-
-     let input = document.getElementById("input");
-     let button = document.getElementById("button");
-     let output = document.getElementById("output");
-     button.addEventListener("click", function(){
-          var datos = input.value.split(",");
-=======
      if(agrupados.hasAttribute("onclick")){
           mainA();
      }
@@ -82,21 +74,7 @@ function soloNumeros(e){
         
           return false;
      }
-}
->>>>>>> Stashed changes
-
-          for(let i = 0; i< datos.length; i++) datos[i]= parseFloat(datos[i]);  
-
-          datos.sort(function(prev,next) {
-          return prev - next; 
-          });
-          media = hallarMedia(datos);
-          mediana = hallarMediana(datos);
-          moda = hallarModa(datos);
-          output.innerHTML = " media " +  media + "<br/>" + "mediana: " + mediana + "<br/>" + "moda: " + moda
-          alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema")
-     })}
-
+}         
 
 function hallarMedia(datos){
      var media = 0;
