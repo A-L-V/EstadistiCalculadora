@@ -1,6 +1,10 @@
 var a = 10
 
 function noAgrupados(){
+     let noAgrupados = document.getElementById("noAgrupados")
+     let agrupados = document.getElementById("agrupados")
+     noAgrupados.removeAttribute("onclick")
+     agrupados.setAttribute("onclick","agrupados()")
      document.getElementById("divNoAgrupados").style.display="block"
      document.getElementById("divAgrupados").style.display="none"
      if(agrupados.hasAttribute("onclick")){
@@ -74,36 +78,47 @@ function soloNumeros(e){
         
           return false;
      }
-}         
+}        
 
-function hallarMedia(datos){
-     var media = 0;
-     for(let i = 0; i < datos.length; i++) media = media + datos[i];
-     media = media/(datos.length)
-     return media;  
+function procesoDatos(){
+     var datos = input.value.split(",");
+          for(let i = 0; i< datos.length; i++) datos[i]= parseFloat(datos[i]);  
+               datos.sort(function(prev,next) {
+               return prev - next; 
+          });
+     return datos
 }
 
-function hallarMediana(datos){
+function hallarMediaNoAgrupados(datos,mediaNoAgrupados){
+     var media =0;
+     for(let i = 0; i < datos.length; i++) media = media + datos[i];
+     media = media/(datos.length)
+     mediaNoAgrupados[1].innerHTML = (Math.floor(media*100))/100
+}
+
+function hallarMedianaNoAgrupados(datos,medianaNoAgrupados){
      var mediana;
      if (datos.length % 2 == 0){
-          mediana = datos[(datos.length/2)-1];
+          mediana = (datos[(datos.length/2)-1] + datos[datos.length/2])/2;
      }
      else{
           mediana = datos[((datos.length+1)/2)-1];
      }
-     return mediana;
+     medianaNoAgrupados[1].innerHTML = (Math.floor(mediana*100))/100
 }
 
-function hallarModa(datos){
+function hallarModaNoAgrupados(datos,modaNoAgrupados){
      var numero = 0 ; valor = 0,rep = 0;
      for(let i = 0; i < datos.length; i++){
           numero = datos[i]
           if(rep <  verifica(numero,datos)){
                rep = verifica(numero,datos)
                valor= datos[i];
+               
           }
      }
-     return valor;
+
+     modaNoAgrupados[1].innerHTML = (Math.floor(valor*100))/100
 }
 
 function verifica(num,datos){

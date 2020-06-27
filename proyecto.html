@@ -3,25 +3,15 @@
        <meta charset="utf-8"/>
        <link rel="stylesheet" href="proyecto.css"/>
      </head>
-     <body style="color: white;"> 
+     <body style="color: white;" > 
           <div><p>
-               <input type="button" value="Datos no agrupados" onclick="noAgrupados()" />
-               <input type="button" value="Datos agrupados" onclick="agrupados()"/>
+               <input id="noAgrupados" onclick="noAgrupados()" type="button" value="Datos no agrupados" />
+               <input id="agrupados" onclick="agrupados()" type="button" value="Datos agrupados"/>
           </p>
-          <div id= "divAgrupados" >
-               <input type="button" value= "+ interval" class="interval"/>
-               <input type="button" value= "- interval" class="interval"/><br/>
+          <div id= "divAgrupados" style="display: none;">
+               <input type="button" value= "+ interval" class="interval" id="interval0"/>
+               <input type="button" value= "- interval" class="interval" id="interval1" /><br/>
                <table id = table>
-                    <tr class = "">
-                         <th>Intervalos</th>
-                         <th>frecuencia</th>
-                         <th>frecuencia absoluta</th>
-                    </tr>
-                    <tr>
-                         <td> <input type="text"/></td>
-                         <td> <input type= "number"/></td>
-                         <td> </td>
-                    </tr>
                     <tr>
                          <th class = "th" id = "primero">Intervalos</th>
                          <th class = "th">frecuencia</th>
@@ -30,6 +20,19 @@
                          <th class = "th"><input type="button" value="f*mc" id="fMc"></th>
                     </tr>
                </table>
+               <div>
+                    <input type="button" value="Media: " class="media"/>
+                    <p class="media"></p>
+               </div>
+               <div>
+                    <input type="button" value="Mediana: " class="mediana"/>
+                    <p class="mediana"></p>
+               </div>
+               <div>
+                    <input type="button" value="Moda: " class="moda"/>
+                    <p class="moda"></p>
+               </div>
+               <input type="button" id ="ejecutar" value="ejecutar todo"/>
           </div>
 
           <div id="divNoAgrupados" style="display: none" >
@@ -54,6 +57,6 @@
                </div>
           </div>  
        <script src = "proyecto.js"></script>
-       <script src = "proyecto2.js"></script>
+       <script src = "proyecto1.js"></script>
      </body>
 </html> 

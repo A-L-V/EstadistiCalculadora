@@ -1,20 +1,56 @@
 function agrupados(){
+     let noAgrupados = document.getElementById("noAgrupados");
+     let agrupados = document.getElementById("agrupados");
+     agrupados.removeAttribute("onclick");
+     noAgrupados.setAttribute("onclick","noAgrupados()");
      document.getElementById("divAgrupados").style.display="block";
      document.getElementById("divNoAgrupados").style.display="none";
+     if(noAgrupados.hasAttribute("onclick")){
+          mainB();
+     };
+}
+
+
+function mainB(){     
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
+     var fila = document.getElementsByClassName("fila");
+     var td = document.getElementsByClassName("td");
+     var creados = 0;
+     var media = document.getElementsByClassName("media")
+     var mediana = document.getElementsByClassName("mediana")
+     var moda = document.getElementsByClassName("moda")
+     var cantiTh = document.getElementsByClassName("th").length;
+     var columna0 = document.getElementsByClassName("columna0");
+     var columna1 = document.getElementsByClassName("columna1");
+     var columna2 = document.getElementsByClassName("columna2");
+     var columna3 = document.getElementsByClassName("columna3");
+     var columna4 = document.getElementsByClassName("columna4");
+
      intervalos[0].addEventListener("click",function(){
-          var tr = document.createElement("tr");
-          tr.style.backgroundColor = "red"
-          table.appendChild(tr)
-          console.log(tr)
-          tr.innerHTML = "estoy aqui"
-     })
+          crearFila();
+          crearTd(fila,fila.length-1,td,td.length,cantiTh);
+          creados++;
+     });
      intervalos[1].addEventListener("click",function(){
-          for(let i = 1; i < 3;i++){
+          if(creados > 0){
                var borrar = table.lastChild;
                table.removeChild(borrar);
+               creados--;
           }
+     });
+
+     media[0].addEventListener("click",function(){
+          hallarMedia(columna4,media[1],columna2[columna2.length-1]);
+     });
+
+     mediana[0].addEventListener("click",function(){
+          console.log(mediana[1])
+          hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
+     })
+
+     moda[0].addEventListener("click",function(){
+          hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
      })
 
      document.getElementById("mc").addEventListener("click",function(){
@@ -157,3 +193,4 @@ function crearTd(fila,cantFila,td,cantTd,cantiTh){
      number.setAttribute("class","columna1")
      td[cantTd].appendChild(number)          
 }
+/* */ 

@@ -9,18 +9,15 @@ div p input{
      border-color: black;
 }
 #input{
-     width: 10%;
+     width: 50%;
      border:2px solid #aaa;
      border-radius: 4px;
      margin:1%;
      outline: 8px;
      padding: 8px;
+     box-sizing: border-box;
      background-color: black;
      color: white;
-     text-align: center;
-     max-width: 70%;
-     max-height: 20%;
-     height: 10%;
 }
 #divNoAgrupados{
      font-size: 150%;
@@ -66,4 +63,10 @@ th{
      padding: 5px;
      text-align: center;
      border-color: teal;
+     width: 20%;
+
+}
+
+tr td input {
+     width: 40%;
 }
