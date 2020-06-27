@@ -45,7 +45,6 @@ function mainB(){
      });
 
      mediana[0].addEventListener("click",function(){
-          console.log(mediana[1])
           hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
      })
 

@@ -61,7 +61,7 @@ function soloNumeros(e){
      tecladoEspecial = false;
      for(var i in especiales){
           if(e.key == especiales[i]){
-               a  = a + 1.2
+               a  = a + 1.3
                input.style.width = a + "%"
                input.style.backgroundColor = "blue"
                if (parseInt(a % 80) === 0){
