@@ -11,12 +11,14 @@ function noAgrupados(){
           mainA();
      }
 }
+
 function mainA(){
      var input = document.getElementById("input");
      let mediaNoAgrupados = document.getElementsByClassName("mediaNoAgrupados");
      let medianaNoAgrupados = document.getElementsByClassName("medianaNoAgrupados");
      let modaNoAgrupados = document.getElementsByClassName("modaNoAgrupados");
      let mostrarArray = document.getElementById("mostrarArray");
+     let varianzaNoAgrupados = document.getElementsByClassName("varianzaNoAgrupados")
      mediaNoAgrupados[0].addEventListener("click",function(){
           datos = procesoDatos();
           hallarMediaNoAgrupados(datos,mediaNoAgrupados);
@@ -33,12 +35,17 @@ function mainA(){
           alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
           mostrar(datos,mostrarArray);
      })
-     document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
+     varianzaNoAgrupados[0].addEventListener("click",function(){
           datos = procesoDatos();
-          hallarMediaNoAgrupados(datos,mediaNoAgrupados);
-          hallarMedianaNoAgrupados(datos,medianaNoAgrupados);
-          hallarModaNoAgrupados(datos,modaNoAgrupados);
-          alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
+          hallarVarianza( prompt("ingrese si es muestra o poblacion"),datos,mediaNoAgrupados[0].click(),varianzaNoAgrupados);
+          mostrar(datos,mostrarArray);
+     })
+
+     document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
+          mediaNoAgrupados[0].click();
+          medianaNoAgrupados[0].click();
+          modaNoAgrupados[0].click();
+          varianzaNoAgrupados[0].click();
           mostrar(datos,mostrarArray);
           alert("correo de contacto: richardalvaradoflores@gmail.com");
      })
@@ -51,6 +58,23 @@ function mostrar(a,b){
           texto = texto  + a[i] + ",";
      }
      b.innerHTML = texto;
+}
+
+function hallarVarianza(type,datos,X,mostrar){
+     let S = 0;
+     if(type == "muestral"){
+          for(let i = 0; i < datos.length;i++){
+               S = (datos[i] - X)^2 + S;
+          }
+          S =  S/(datos.length - 1 );
+     }
+     else if (type == "poblacion"){
+          for(let i = 0; i < datos.length;i++){
+               S = (datos[i] - X)^2 + S;
+          }
+          S =  S/(datos.length);
+     }
+     mostrar[1].innerHTML = (Math.floor(S*100))/100;
 }
 
 function soloNumeros(e){
@@ -93,6 +117,7 @@ function hallarMediaNoAgrupados(datos,mediaNoAgrupados){
      for(let i = 0; i < datos.length; i++) media = media + datos[i];
      media = media/(datos.length);
      mediaNoAgrupados[1].innerHTML = (Math.floor(media*100))/100;
+     return media;
 }
 
 function hallarMedianaNoAgrupados(datos,medianaNoAgrupados){
