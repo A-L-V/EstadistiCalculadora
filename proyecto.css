@@ -27,13 +27,14 @@ div p input{
      max-width: 80%;
      text-align: center;
 }
+#divAgrupados{
+     text-align: center;
+}
 #divNoAgrupados{
      font-size: 150%;
      text-align: center;
-
 }
 #interval0{
-     margin-left: 2.5%;
      margin-bottom: 0.5%;
      background-color: rgb(255, 0, 0);
      border-color: white;
@@ -41,7 +42,6 @@ div p input{
 }
 
 #interval1{
-     margin-left: 2.5%;
      margin-bottom: 0.5%;
      background-color: black;
      color: white;
@@ -50,7 +50,9 @@ div p input{
 
 
 table{
-     width: 100%;
+     margin-left: 25%;
+     text-align: center;
+     width: 50%;
      border: 1px;
      border: solid;
      border-collapse: collapse;
@@ -72,9 +74,9 @@ th{
      text-align: center;
      border-color: teal;
      width: 20%;
-
 }
 
 tr td input {
-     width: 40%;
+     width: 20%;   
+     text-align: center;
 }
