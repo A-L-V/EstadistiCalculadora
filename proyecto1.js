@@ -1,5 +1,3 @@
-
-
 function agrupados(){
      let noAgrupados = document.getElementById("noAgrupados");
      let agrupados = document.getElementById("agrupados");
@@ -12,28 +10,18 @@ function agrupados(){
      };
 }
 var creados = 0;
-var variables = [];
 
 function mainB(){     
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
-
-// variables para la matriz
-     var fila = document.getElementsByClassName("fila");
-     var td = document.getElementsByClassName("td");
-
-
-     
+     var variables =[]
      var media = document.getElementsByClassName("media");
      var mediana = document.getElementsByClassName("mediana");
      var moda = document.getElementsByClassName("moda");
      var cantTh = document.getElementsByClassName("th").length;
 
      intervalos[0].addEventListener("click",function(){
-          //crearFila();
-          crearArray(cantTh);
-          //crearTd(fila,td,td.length,cantiTh);
-          //creados++;
+          crearArray(cantTh,variables);
      });
      intervalos[1].addEventListener("click",function(){
           if(creados > 0){
@@ -44,41 +32,42 @@ function mainB(){
      });
 
      media[0].addEventListener("click",function(){
-          hallarMedia()
+          hallarMedia(variables)
      });
 
      mediana[0].addEventListener("click",function(){
-          hallarMediana();
+          hallarMediana(variables);
      })
 
      moda[0].addEventListener("click",function(){
           hallarModa();
      })
-     
 }
 
-
-function crearArray(cantTh){
+function crearArray(cantTh,variables){
      var fila = document.createElement("tr");
      variables.push([fila])
      table.appendChild(fila)
      var cantFilas = variables.length -1;
      for(let i = 0; i < cantTh; i++){
           var td = document.createElement("td");
-          variables[cantFilas][0].appendChild(td);
           variables[cantFilas].push([td]);
+          variables[cantFilas][0].appendChild(td);
+      
      }
-     console.log(variables[cantFilas])
      for(let i = 0; i<2;i++){
           var number = document.createElement("input");
           number.setAttribute("type","number");
-          variables[cantFilas][1].appendChild(number)
+          variables[cantFilas][1].push(number)
+          variables[cantFilas][1][0].appendChild(number)
      }
      var number = document.createElement("input");
-     number.setAttribute("type","number");
-     variables[cantFilas][2].appendChild(number)
-     console.log(variables)
+     number.setAttribute("type","number"); 
+     variables[cantFilas][2].push(number)
+     variables[cantFilas][2][0].appendChild(number)
+     return variables
 }
+
 function hallarModa(){
      var posicion = (n.innerHTML)/2;
      var a = 0
@@ -105,52 +94,44 @@ function hallarModa(){
 }
 
 
-function hallarMediana(){
-     var posicion = (n.innerHTML)/2;
+function hallarMediana(variables){
+     var n = sumaN(variables);
      var a = 0;
-     while(posicion > columna2[a].innerHTML){
+     posicion = n/2
+     x = parseFloat(variables[0][2][1].value)
+     while(posicion > x){
+          x = x + parseFloat(variables[a][2][1].value);
           a++;
      }
-     var filaN = fila[a];
-     var limiteInferior = parseFloat(columna0[a*2].value);
-     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior;  
+     console.log(a)
+     var limiteInferior = parseFloat(variables[a][1][1].value);
+     var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;  
      var FiAnterior;
+     var f = parseFloat(variables[a][1][2].value)
      if(a > 0){
-          FiAnterior = parseFloat(columna2[a-1].innerHTML);
+          FiAnterior = parseFloat(variables[a-1][2][1].value);;
      }
      else FiAnterior = 0
-     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/parseFloat(columna1[a].value));
-     escribirMediana[1].innerHTML = (Math.floor(mediana*100))/100;
+     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/f);
+     mediana = Math.floor(mediana*100)/100;
+     console.log(mediana)
 }
 
-function hallarMedia(){
+function hallarMedia(variables){
+     var total = 0;
      var media = 0;
-     for(let i = 0; i < columna4.length;i++){
-          media = parseFloat(media)+ parseFloat(columna4[i].innerHTML);
+     var n = sumaN(variables);
+     for(let i = 0; i < variables.length; i++){
+          var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2
+          total = total + mc*parseFloat(variables[i][2][1].value)
      }
-     mostrar.innerHTML =+ (Math.floor(media/(n.innerHTML)*100))/100;
-     
+     media = total/n;
+     media = Math.floor(media*100)/100;     
 }
-
-
-function crearFila(){
-     var tr = document.createElement("tr");
-     tr.setAttribute("class","fila");
-     table.appendChild(tr);
-}
-
-function crearTd(fila,td,cantTd,cantiTh){
-     
-     for(let i = 0; i<2;i++){
-          var text = document.createElement("input");
-          text.setAttribute("type","number");
-          text.setAttribute("class","columna0");
-          td[cantTd].appendChild(text);
+function sumaN(variables){
+     var n = 0;
+     for(let i = 0; i < variables.length; i++){
+          n = n + parseFloat(variables[i][2][1].value)
      }
-     cantTd++;
-     var number = document.createElement("input");
-     number.setAttribute("type","number");
-     number.setAttribute("class","columna1");
-     td[cantTd].appendChild(number);  
+     return n;
 }
-/* */ 
