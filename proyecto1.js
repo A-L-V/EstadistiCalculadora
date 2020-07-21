@@ -9,9 +9,9 @@ function agrupados(){
           mainB();
      };
 }
-var creados = 0;
 
 function mainB(){     
+     var creados = 0;
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
      var variables =[]
@@ -22,25 +22,30 @@ function mainB(){
 
      intervalos[0].addEventListener("click",function(){
           crearArray(cantTh,variables);
+          creados++;
      });
      intervalos[1].addEventListener("click",function(){
           if(creados > 0){
                var borrar = table.lastChild;
                table.removeChild(borrar);
                creados--;
+               variables.pop()
           }
      });
 
      media[0].addEventListener("click",function(){
-          hallarMedia(variables)
+          var writeMedia = hallarMedia(variables);
+          media[1].innerHTML = writeMedia;
      });
 
      mediana[0].addEventListener("click",function(){
-          hallarMediana(variables);
+          var writeMediana = hallarMediana(variables);
+          mediana[1].innerHTML = writeMediana;
      })
 
      moda[0].addEventListener("click",function(){
-          hallarModa();
+          var writeModa = hallarModa(variables);
+          moda[1].innerHTML = writeModa;
      })
 }
 
@@ -68,53 +73,65 @@ function crearArray(cantTh,variables){
      return variables
 }
 
-function hallarModa(){
-     var posicion = (n.innerHTML)/2;
-     var a = 0
-     while(posicion > columna2[a].innerHTML){
-          a++;
+function hallarModa(variables){
+     var n = sumaN(variables);
+     var a = 0;
+     posicion = n/2
+     var x = 0;
+     do{
+          x = x + parseFloat(variables[a][2][1].value);
+          if(posicion < x)
+          {
+               a = a;
+          }
+          else a++;
+     }while( posicion > x)
+     if( posicion == x){
+          return posicion
      }
-     var filaN = fila[a];
-     var limiteInferior = parseFloat(columna0[a*2].value);
-     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior ;
+     var limiteInferior = parseFloat(variables[a][1][1].value);
+     var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;  
      var fiAnterior;
      var fiSuperior;
-
-     if(a>0)  fiAnterior = columna1[a-1].value;
+     if(a>0)  fiAnterior = variables[a-1][2][1].value;
      else fiAnterior = 0;
-
-     if(a +1 == columna1.length)     fiSuperior = 0;
-     else fiSuperior = columna1[a+1].value;
-
-     var d1 = columna1[a].value - fiAnterior;
-     var d2 = columna1[a].value - fiSuperior;
+     if(a + 1 == variables.length)     fiSuperior = 0;
+     else fiSuperior = variables[a+1][2][1].value;
+     var d1 = variables[a][2][1].value - fiAnterior;
+     var d2 = variables[a][2][1].value - fiSuperior;
      var moda = limiteInferior + (amplitud*(d1/(d1 + d2)));
-     escribirModa[1].innerHTML = (Math.floor(moda*100))/100;
+     moda = (Math.floor(moda*100))/100;
+     return moda;
 
 }
-
 
 function hallarMediana(variables){
      var n = sumaN(variables);
      var a = 0;
      posicion = n/2
-     x = parseFloat(variables[0][2][1].value)
-     while(posicion > x){
+     var x = 0;
+     do{
           x = x + parseFloat(variables[a][2][1].value);
-          a++;
+          if(posicion < x)
+          {
+               a = a;
+          }
+          else a++;
+     }while( posicion > x)
+     if( posicion == x){
+          return posicion
      }
-     console.log(a)
      var limiteInferior = parseFloat(variables[a][1][1].value);
      var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;  
      var FiAnterior;
-     var f = parseFloat(variables[a][1][2].value)
+     var fi = parseFloat(variables[a][2][1].value)
      if(a > 0){
-          FiAnterior = parseFloat(variables[a-1][2][1].value);;
+          FiAnterior = x - fi;
      }
-     else FiAnterior = 0
-     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/f);
+     else FiAnterior = 0;
+     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/fi);
      mediana = Math.floor(mediana*100)/100;
-     console.log(mediana)
+     return mediana
 }
 
 function hallarMedia(variables){
@@ -127,7 +144,9 @@ function hallarMedia(variables){
      }
      media = total/n;
      media = Math.floor(media*100)/100;     
+     return media;
 }
+
 function sumaN(variables){
      var n = 0;
      for(let i = 0; i < variables.length; i++){
