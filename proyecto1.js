@@ -18,6 +18,10 @@ function mainB(){
      var media = document.getElementsByClassName("media");
      var mediana = document.getElementsByClassName("mediana");
      var moda = document.getElementsByClassName("moda");
+     var varianza = document.getElementsByClassName("varianza");
+     var desviacionStandar = document.getElementsByClassName("desviacionStandar");
+     var coeficienteVariacion = document.getElementsByClassName("coeficienteVariacion");
+
      var cantTh = document.getElementsByClassName("th").length;
 
      intervalos[0].addEventListener("click",function(){
@@ -47,6 +51,40 @@ function mainB(){
           var writeModa = hallarModa(variables);
           moda[1].innerHTML = writeModa;
      })
+     varianza[0].addEventListener("click",function(){  
+          var writeMedia = hallarMedia(variables);      
+          var writeVarianza = hallarVarianza(variables,writeMedia);
+          varianza[1].innerHTML = writeVarianza;
+     })
+     desviacionStandar[0].addEventListener("click",function(){
+          var writeMedia = hallarMedia(variables);      
+          var writeVarianza = hallarVarianza(variables,writeMedia);
+          var desviationStandar = Math.sqrt(writeVarianza);
+          desviationStandar = (Math.floor(desviationStandar*100))/100;
+          desviacionStandar[1].innerHTML = desviationStandar;
+     })
+     coeficienteVariacion[0].addEventListener("click",function(){
+          var writeMedia = hallarMedia(variables);      
+          var writeVarianza = hallarVarianza(variables,writeMedia);
+          var desviationStandar = (writeVarianza)^(1/2);
+          var coefiVariancion = desviationStandar*100/readMedia;
+          coefiVariancion = (Math.floor(coefiVariancion*100))/100;
+          coeficienteVariacion[1].innerHTML = coefiVariancion;
+     })
+}
+
+function hallarVarianza(variables,media){
+     var total = 0;
+     for(let i = 0; i < variables.length; i++){
+          var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2;
+          var mcXf = ((mc - media)*(mc - media))*parseFloat(variables[i][2][1].value);
+          total = total + mcXf;
+     }
+     
+     var n = sumaN(variables);
+     var varianza = total/n;
+     varianza = (Math.floor(varianza*100))/100;
+     return varianza;
 }
 
 function crearArray(cantTh,variables){
