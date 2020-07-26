@@ -11,18 +11,13 @@ function noAgrupados(){
           mainA();
      }
 }
+
 function mainA(){
      var input = document.getElementById("input");
      let mediaNoAgrupados = document.getElementById("mediaNoAgrupados");
      let medianaNoAgrupados = document.getElementById("medianaNoAgrupados");
      let modaNoAgrupados = document.getElementById("modaNoAgrupados");
      let mostrarArray = document.getElementById("mostrarArray");
-<<<<<<< Updated upstream
-     mediaNoAgrupados[0].addEventListener("click",function(){
-          datos = procesoDatos();
-          hallarMediaNoAgrupados(datos,mediaNoAgrupados);
-          mostrar(datos,mostrarArray);
-=======
      let varianzaNoAgrupados = document.getElementById("varianzaNoAgrupados")
      let variacionNoAgrupados = document.getElementById("variacionNoAgrupados")
      let desviacionTipicaNoAgrupados = document.getElementById("desviacionTipicaNoAgrupados")
@@ -36,7 +31,6 @@ function mainA(){
                tipo[1].click();
           }
           x = 0;
->>>>>>> Stashed changes
      })
      tipo[1].addEventListener("click",function(){
           if(tipo[0].checked){
@@ -55,19 +49,10 @@ function mainA(){
 
           var readModa = hallarModaNoAgrupados(datos);
           alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
-<<<<<<< Updated upstream
-          mostrar(datos,mostrarArray);
-     })
-     document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
-          datos = procesoDatos();
-          hallarMediaNoAgrupados(datos,mediaNoAgrupados);
-          hallarMedianaNoAgrupados(datos,medianaNoAgrupados);
-          hallarModaNoAgrupados(datos,modaNoAgrupados);
-          alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
-=======
           modaNoAgrupados.innerHTML = "Moda: " + readModa;
           
           var readVarianza = hallarVarianzaNoAgrupados(x,datos,readMedia);
+          var readVarianza = (Math.floor(readVarianza*100))/100
           varianzaNoAgrupados.innerHTML = "Varianza: " + readVarianza;
 
           var desviacionTipica = Math.sqrt(readVarianza);
@@ -78,7 +63,6 @@ function mainA(){
           variacion = (Math.floor(variacion*100))/100;
           variacionNoAgrupados.innerHTML = "Coeficiente de Variacion: " + variacion + "%";
 
->>>>>>> Stashed changes
           mostrar(datos,mostrarArray);
      })
      input.addEventListener("onkeypress",soloNumeros);
@@ -92,8 +76,6 @@ function mostrar(a,b){
      b.innerHTML = texto;
 }
 
-<<<<<<< Updated upstream
-=======
 function hallarVarianzaNoAgrupados(x,datos,media){
      let S = 0;
      for(let i = 0; i < datos.length;i++){
@@ -105,7 +87,6 @@ function hallarVarianzaNoAgrupados(x,datos,media){
      return S;
 }
 
->>>>>>> Stashed changes
 function soloNumeros(e){
      key = e.keyCode;
      teclado = String.fromCharCode(key);
@@ -145,12 +126,8 @@ function hallarMediaNoAgrupados(datos){
      var media =0;
      for(let i = 0; i < datos.length; i++) media = media + datos[i];
      media = media/(datos.length);
-<<<<<<< Updated upstream
-     mediaNoAgrupados[1].innerHTML = (Math.floor(media*100))/100;
-=======
      media = (Math.floor(media*100))/100;
      return media;
->>>>>>> Stashed changes
 }
 
 function hallarMedianaNoAgrupados(datos){
