@@ -138,13 +138,19 @@ function crearArray(cantTh,variables){
           var td = document.createElement("td");
           variables[cantFilas].push([td]);
           variables[cantFilas][0].appendChild(td);
-      
      }
      for(let i = 0; i<2;i++){
           var number = document.createElement("input");
           number.setAttribute("type","number");
           variables[cantFilas][1].push(number)
           variables[cantFilas][1][0].appendChild(number)
+
+          if(i == 0){
+               var p = document.createElement("span");
+               variables[cantFilas][1][0].appendChild(p)
+               p.innerHTML = "--"
+          }
+           
      }
      var number = document.createElement("input");
      number.setAttribute("type","number"); 
