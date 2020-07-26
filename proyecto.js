@@ -23,6 +23,8 @@ function mainA(){
      let desviacionTipicaNoAgrupados = document.getElementById("desviacionTipicaNoAgrupados")
      let ejecutar = document.getElementById("ejecutarNoAgrupados") 
      let tipo = document.getElementsByClassName("tipoNoAgrupados")
+     let perceptilDato = document.getElementById("perceptilDatoNoAgrupado")
+     var coefDeAsimetria = document.getElementById("coeficienteDeAsimetriaNoAgrupados");  
      if(!tipo[0].checked)  tipo[0].click();
      var x = 0
 
@@ -63,9 +65,29 @@ function mainA(){
           variacion = (Math.floor(variacion*100))/100;
           variacionNoAgrupados.innerHTML = "Coeficiente de Variacion: " + variacion + "%";
 
+          if(perceptilDato.value > 0 && perceptilDato.value <=100){
+               readPerceptil = hallarPerceptilNoAgrupados(datos,perceptilDato.value);
+               var writePerceptil = document.getElementById("perceptilNoAgrupados");
+               writePerceptil.innerHTML = "Perceptil(" + perceptilDato.value + "): " + readPerceptil
+          }
+          coefDeAsimetria.innerHTML = "Coeficiente de Asimetria de Pearson: " + (3*(readMedia- readMediana)/desviacionTipica); 
+          
+
           mostrar(datos,mostrarArray);
      })
      input.addEventListener("onkeypress",soloNumeros);
+}
+
+function hallarPerceptilNoAgrupados(datos,p){
+     var n = datos.length;
+     var posicion = p*(n+1)/100;
+     var entero = parseInt(posicion);
+     var decimal = posicion - entero;
+     var limiteInferior = datos[entero-1];
+     var razon = datos[entero]  - limiteInferior;
+     var perceptil = limiteInferior + razon*decimal;
+     perceptil = Math.floor(perceptil*100)/100;
+     return perceptil;
 }
 
 function mostrar(a,b){

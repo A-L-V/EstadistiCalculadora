@@ -23,8 +23,9 @@ function mainB(){
      var desviacionStandar = document.getElementById("desviacionStandar");
      var coeficienteVariacion = document.getElementById("coeficienteVariacion");
      var tipo = document.getElementsByClassName("tipo")
-
+     var perceptilDato = document.getElementById("perceptilDato");
      var cantTh = document.getElementsByClassName("th").length;
+     var coefDeAsimetria = document.getElementById("coeficienteDeAsimetria");  
      if(!tipo[0].checked)  tipo[0].click();
      var x = 0;
      tipo[0].addEventListener("click",function(){
@@ -53,6 +54,8 @@ function mainB(){
                variables.pop()
           }
      });
+     intervalos[0].click();
+
      ejecutar.addEventListener("click",function(){
           var writeMedia = hallarMedia(variables);
           media.innerHTML = "media: " + writeMedia;
@@ -73,7 +76,43 @@ function mainB(){
           var coefiVariancion = desviationStandar*100/writeMedia;
           coefiVariancion = (Math.floor(coefiVariancion*100))/100;
           coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion +"%";
+
+          if(perceptilDato.value > 0 && perceptilDato.value <=100){
+               readPerceptil = hallarPerceptil(variables,perceptilDato.value);
+               var writePerceptil = document.getElementById("perceptil");
+               writePerceptil.innerHTML = "Perceptil(" + perceptilDato.value + "): " + readPerceptil;
+          }
+          coefDeAsimetria.innerHTML = "Coeficiente de Asimetria de Pearson: " + (3*(writeMedia- writeMediana)/desviationStandar);
+
      })
+}
+
+function hallarPerceptil(variables,p){
+     var n = sumaN(variables);
+     var posicion = p*(n)/100;
+     var a = 0;
+     var x = 0;
+     do{
+          x = x + parseFloat(variables[a][2][1].value);
+          if(posicion < x)
+          {
+               a = a;
+          }
+          else a++;
+     }while( posicion > x)
+     if( posicion == x){
+          return parseFloat(variables[a][1][2].value);
+     }    
+     var limiteInferior = parseFloat(variables[a][1][1].value);
+     var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;
+     var fi = parseFloat(variables[a][2][1].value);
+     if(a > 0){
+          FiAnterior = x - fi;
+     }
+     else FiAnterior = 0; 
+     var perceptil = limiteInferior + (amplitud*(posicion - FiAnterior)/fi);
+     perceptil = (Math.floor(perceptil*100)/100);
+     return perceptil;
 }
 
 function hallarVarianza(variables,media,x){
