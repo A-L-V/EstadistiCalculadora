@@ -38,7 +38,7 @@ function mainA(){
           }
           x = 1;
      })
-     document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
+     varianzaNoAgrupados[0].addEventListener("click",function(){
           datos = procesoDatos();
           
           var readMedia = hallarMediaNoAgrupados(datos);

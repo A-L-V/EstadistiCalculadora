@@ -10,24 +10,10 @@ function agrupados(){
      };
 }
 
-
 function mainB(){     
+     var creados = 0;
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
-<<<<<<< Updated upstream
-     var fila = document.getElementsByClassName("fila");
-     var td = document.getElementsByClassName("td");
-     var creados = 0;
-     var media = document.getElementsByClassName("media");
-     var mediana = document.getElementsByClassName("mediana");
-     var moda = document.getElementsByClassName("moda");
-     var cantiTh = document.getElementsByClassName("th").length;
-     var columna0 = document.getElementsByClassName("columna0");
-     var columna1 = document.getElementsByClassName("columna1");
-     var columna2 = document.getElementsByClassName("columna2");
-     var columna3 = document.getElementsByClassName("columna3");
-     var columna4 = document.getElementsByClassName("columna4");
-=======
      var variables =[]
      var ejecutar = document.getElementById("ejecutar")
      var media = document.getElementById("media");
@@ -37,83 +23,54 @@ function mainB(){
      var desviacionStandar = document.getElementById("desviacionStandar");
      var coeficienteVariacion = document.getElementById("coeficienteVariacion");
      var tipo = document.getElementsByClassName("tipo")
+
      var cantTh = document.getElementsByClassName("th").length;
-     var x = 0;
-     tipo[0].click();
      tipo[0].addEventListener("click",function(){
-          if(tipo[1].checked){
-               tipo[1].click();
-          }
-          x = 0;
+          
      })
      tipo[1].addEventListener("click",function(){
-          if(tipo[0].checked){
-               tipo[0].click();
+          if(tipo[0]){
+               
           }
-          x = 1;
      })
->>>>>>> Stashed changes
 
      intervalos[0].addEventListener("click",function(){
-          crearFila();
-          crearTd(fila,fila.length-1,td,td.length,cantiTh);
+          crearArray(cantTh,variables);
           creados++;
      });
+
      intervalos[1].addEventListener("click",function(){
           if(creados > 0){
                var borrar = table.lastChild;
                table.removeChild(borrar);
                creados--;
+               variables.pop()
           }
      });
+     ejecutar.addEventListener("click",function(){
+          var writeMedia = hallarMedia(variables);
+          media.innerHTML = "media: " + writeMedia;
 
-     media[0].addEventListener("click",function(){
-          hallarMedia(columna4,media[1],columna2[columna2.length-1]);
-     });
+          var writeMediana = hallarMediana(variables);
+          mediana.innerHTML = "mediana: " + writeMediana;
 
-     mediana[0].addEventListener("click",function(){
-          hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
-     })
+          var writeModa = hallarModa(variables);
+          moda.innerHTML = "moda: " + writeModa;
 
-<<<<<<< Updated upstream
-     moda[0].addEventListener("click",function(){
-          hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
-     })
-=======
-          var writeVarianza = hallarVarianza(variables,writeMedia,x);
+          var writeVarianza = hallarVarianza(variables,writeMedia);
           varianza.innerHTML = " varianza: " + writeVarianza;
->>>>>>> Stashed changes
 
-     document.getElementById("mc").addEventListener("click",function(){
-          hallarMc(columna0,columna3);
-     });
-     document.getElementById("Fi").addEventListener("click",function(){
-          hallarFi(columna1,columna2);          
-     });
-     document.getElementById("fMc").addEventListener("click",function(){
-          hallar_fMc(columna3,columna1,columna4);
-     });
+          var desviationStandar = Math.sqrt(writeVarianza);
+          desviationStandar = (Math.floor(desviationStandar*100))/100;
+          desviacionStandar.innerHTML = "desviacion Estandar: " + desviationStandar;
 
-<<<<<<< Updated upstream
-     document.getElementById("ejecutar").addEventListener("click",function(){
-          
-          hallarMc(columna0,columna3);
-          hallarFi(columna1,columna2);
-          hallar_fMc(columna3,columna1,columna4);
-          hallarMedia(columna4,media[1],columna2[columna2.length-1]);
-          hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
-          hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
-          alert("correo de contacto: richardalvaradoflores@gmail.com");
-     })
-     
-=======
           var coefiVariancion = desviationStandar*100/writeMedia;
           coefiVariancion = (Math.floor(coefiVariancion*100))/100;
-          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion + "%";
+          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion;
      })
 }
 
-function hallarVarianza(variables,media,x){
+function hallarVarianza(variables,media){
      var total = 0;
      for(let i = 0; i < variables.length; i++){
           var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2;
@@ -122,126 +79,113 @@ function hallarVarianza(variables,media,x){
      }
      
      var n = sumaN(variables);
-     var varianza = total/(n - x);
+     var varianza = total/n;
      varianza = (Math.floor(varianza*100))/100;
      return varianza;
->>>>>>> Stashed changes
 }
 
-function hallarModa(n,columna2,fila,columna0,columna1,escribirModa){
-     var posicion = (n.innerHTML)/2;
-     var a = 0
-     while(posicion > columna2[a].innerHTML){
-          a++;
-     }
-     var filaN = fila[a];
-     var limiteInferior = parseFloat(columna0[a*2].value);
-     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior ;
-     var fiAnterior;
-     var fiSuperior;
-
-     if(a>0)  fiAnterior = columna1[a-1].value;
-     else fiAnterior = 0;
-
-     if(a +1 == columna1.length)     fiSuperior = 0;
-     else fiSuperior = columna1[a+1].value;
-
-     var d1 = columna1[a].value - fiAnterior;
-     var d2 = columna1[a].value - fiSuperior;
-     var moda = limiteInferior + (amplitud*(d1/(d1 + d2)));
-     escribirModa[1].innerHTML = (Math.floor(moda*100))/100;
-
-}
-
-
-function hallarMediana(n,columna2,fila,columna0,columna1,escribirMediana){
-     var posicion = (n.innerHTML)/2;
-     var a = 0;
-     while(posicion > columna2[a].innerHTML){
-          a++;
-     }
-     var filaN = fila[a];
-     var limiteInferior = parseFloat(columna0[a*2].value);
-     var amplitud = parseFloat(columna0[(a*2)+1].value) - limiteInferior;  
-     var FiAnterior;
-     if(a > 0){
-          FiAnterior = parseFloat(columna2[a-1].innerHTML);
-     }
-     else FiAnterior = 0
-     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/parseFloat(columna1[a].value));
-     escribirMediana[1].innerHTML = (Math.floor(mediana*100))/100;
-}
-
-function hallarMedia(columna4,mostrar,n){
-     var media = 0;
-     for(let i = 0; i < columna4.length;i++){
-          media = parseFloat(media)+ parseFloat(columna4[i].innerHTML);
-     }
-     mostrar.innerHTML =+ (Math.floor(media/(n.innerHTML)*100))/100;
-     
-}
-
-function hallar_fMc(columna3,columna1,columna4){
-    
-     for(let i = 0; i < columna4.length;i++){
-          columna4[i].innerHTML = parseFloat(columna3[i].innerHTML)*parseFloat(columna1[i].value);
-     }
-}
-
-function hallarMc(columna0,columna3){
-     let x = 0
-     for(let i = 0; i < columna3.length ;i++){
-          columna3[i].innerHTML = (parseInt(columna0[x+1].value) + parseInt(columna0[x].value))/2;
-          x=x+2;
-     }
-     
-}
-
-function hallarFi(columna1,columna2){
-     columna2[0].innerHTML = parseInt(columna1[0].value);
-     columna2[1].innerHTML = parseInt(columna1[1].value) + parseInt(columna2[0].innerHTML);
-     
-     for(let i = 0; i<columna2.length;i++){
-          if(i == 0){
-               columna2[i].innerHTML = parseInt(columna1[i].value);
-          }
-          else{
-               columna2[i].innerHTML = parseInt(columna1[i].value) + parseInt(columna2[i-1].innerHTML);
-          }
-     }
-}
-
-function crearFila(){
-     var tr = document.createElement("tr");
-     tr.setAttribute("class","fila");
-     table.appendChild(tr);
-}
-
-function crearTd(fila,cantFila,td,cantTd,cantiTh){
-     for(let i = 0; i <cantiTh; i++){
-          var cuadro = document.createElement("td");
-          cuadro.setAttribute("class","td");
-          fila[cantFila].appendChild(cuadro);
-          if(i == 2){
-               cuadro.setAttribute("class","columna2");
-          }
-          if(i ==3){
-               cuadro.setAttribute("class","columna3");
-          }
-          if(i ==4){
-               cuadro.setAttribute("class","columna4");
-          }
+function crearArray(cantTh,variables){
+     var fila = document.createElement("tr");
+     variables.push([fila])
+     table.appendChild(fila)
+     var cantFilas = variables.length -1;
+     for(let i = 0; i < cantTh; i++){
+          var td = document.createElement("td");
+          variables[cantFilas].push([td]);
+          variables[cantFilas][0].appendChild(td);
+      
      }
      for(let i = 0; i<2;i++){
-          var text = document.createElement("input");
-          text.setAttribute("type","number");
-          text.setAttribute("class","columna0");
-          td[cantTd].appendChild(text);
+          var number = document.createElement("input");
+          number.setAttribute("type","number");
+          variables[cantFilas][1].push(number)
+          variables[cantFilas][1][0].appendChild(number)
      }
-     cantTd++;
      var number = document.createElement("input");
-     number.setAttribute("type","number");
-     number.setAttribute("class","columna1");
-     td[cantTd].appendChild(number);  
+     number.setAttribute("type","number"); 
+     variables[cantFilas][2].push(number)
+     variables[cantFilas][2][0].appendChild(number)
+     return variables
 }
-/* */ 
+
+function hallarModa(variables){
+     var n = sumaN(variables);
+     var a = 0;
+     posicion = n/2
+     var x = 0;
+     do{
+          x = x + parseFloat(variables[a][2][1].value);
+          if(posicion < x)
+          {
+               a = a;
+          }
+          else a++;
+     }while( posicion > x)
+     if( posicion == x){
+          return posicion
+     }
+     var limiteInferior = parseFloat(variables[a][1][1].value);
+     var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;  
+     var fiAnterior;
+     var fiSuperior;
+     if(a>0)  fiAnterior = variables[a-1][2][1].value;
+     else fiAnterior = 0;
+     if(a + 1 == variables.length)     fiSuperior = 0;
+     else fiSuperior = variables[a+1][2][1].value;
+     var d1 = variables[a][2][1].value - fiAnterior;
+     var d2 = variables[a][2][1].value - fiSuperior;
+     var moda = limiteInferior + (amplitud*(d1/(d1 + d2)));
+     moda = (Math.floor(moda*100))/100;
+     return moda;
+
+}
+
+function hallarMediana(variables){
+     var n = sumaN(variables);
+     var a = 0;
+     posicion = n/2
+     var x = 0;
+     do{
+          x = x + parseFloat(variables[a][2][1].value);
+          if(posicion < x)
+          {
+               a = a;
+          }
+          else a++;
+     }while( posicion > x)
+     if( posicion == x){
+          return posicion
+     }
+     var limiteInferior = parseFloat(variables[a][1][1].value);
+     var amplitud = parseFloat(variables[a][1][2].value) - limiteInferior;  
+     var FiAnterior;
+     var fi = parseFloat(variables[a][2][1].value)
+     if(a > 0){
+          FiAnterior = x - fi;
+     }
+     else FiAnterior = 0;
+     var mediana = limiteInferior + ((amplitud*(posicion - FiAnterior))/fi);
+     mediana = Math.floor(mediana*100)/100;
+     return mediana
+}
+
+function hallarMedia(variables){
+     var total = 0;
+     var media = 0;
+     var n = sumaN(variables);
+     for(let i = 0; i < variables.length; i++){
+          var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2
+          total = total + mc*parseFloat(variables[i][2][1].value)
+     }
+     media = total/n;
+     media = Math.floor(media*100)/100;     
+     return media;
+}
+
+function sumaN(variables){
+     var n = 0;
+     for(let i = 0; i < variables.length; i++){
+          n = n + parseFloat(variables[i][2][1].value)
+     }
+     return n;
+}
