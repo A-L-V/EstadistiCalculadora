@@ -15,19 +15,30 @@ function mainB(){
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
      var variables =[]
-     var media = document.getElementsByClassName("media");
-     var mediana = document.getElementsByClassName("mediana");
-     var moda = document.getElementsByClassName("moda");
-     var varianza = document.getElementsByClassName("varianza");
-     var desviacionStandar = document.getElementsByClassName("desviacionStandar");
-     var coeficienteVariacion = document.getElementsByClassName("coeficienteVariacion");
+     var ejecutar = document.getElementById("ejecutar")
+     var media = document.getElementById("media");
+     var mediana = document.getElementById("mediana");
+     var moda = document.getElementById("moda");
+     var varianza = document.getElementById("varianza");
+     var desviacionStandar = document.getElementById("desviacionStandar");
+     var coeficienteVariacion = document.getElementById("coeficienteVariacion");
+     var tipo = document.getElementsByClassName("tipo")
 
      var cantTh = document.getElementsByClassName("th").length;
+     tipo[0].addEventListener("click",function(){
+          
+     })
+     tipo[1].addEventListener("click",function(){
+          if(tipo[0]){
+               
+          }
+     })
 
      intervalos[0].addEventListener("click",function(){
           crearArray(cantTh,variables);
           creados++;
      });
+
      intervalos[1].addEventListener("click",function(){
           if(creados > 0){
                var borrar = table.lastChild;
@@ -36,40 +47,26 @@ function mainB(){
                variables.pop()
           }
      });
-
-     media[0].addEventListener("click",function(){
+     ejecutar.addEventListener("click",function(){
           var writeMedia = hallarMedia(variables);
-          media[1].innerHTML = writeMedia;
-     });
+          media.innerHTML = "media: " + writeMedia;
 
-     mediana[0].addEventListener("click",function(){
           var writeMediana = hallarMediana(variables);
-          mediana[1].innerHTML = writeMediana;
-     })
+          mediana.innerHTML = "mediana: " + writeMediana;
 
-     moda[0].addEventListener("click",function(){
           var writeModa = hallarModa(variables);
-          moda[1].innerHTML = writeModa;
-     })
-     varianza[0].addEventListener("click",function(){  
-          var writeMedia = hallarMedia(variables);      
+          moda.innerHTML = "moda: " + writeModa;
+
           var writeVarianza = hallarVarianza(variables,writeMedia);
-          varianza[1].innerHTML = writeVarianza;
-     })
-     desviacionStandar[0].addEventListener("click",function(){
-          var writeMedia = hallarMedia(variables);      
-          var writeVarianza = hallarVarianza(variables,writeMedia);
+          varianza.innerHTML = " varianza: " + writeVarianza;
+
           var desviationStandar = Math.sqrt(writeVarianza);
           desviationStandar = (Math.floor(desviationStandar*100))/100;
-          desviacionStandar[1].innerHTML = desviationStandar;
-     })
-     coeficienteVariacion[0].addEventListener("click",function(){
-          var writeMedia = hallarMedia(variables);      
-          var writeVarianza = hallarVarianza(variables,writeMedia);
-          var desviationStandar = (writeVarianza)^(1/2);
-          var coefiVariancion = desviationStandar*100/readMedia;
+          desviacionStandar.innerHTML = "desviacion Estandar: " + desviationStandar;
+
+          var coefiVariancion = desviationStandar*100/writeMedia;
           coefiVariancion = (Math.floor(coefiVariancion*100))/100;
-          coeficienteVariacion[1].innerHTML = coefiVariancion;
+          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion;
      })
 }
 
