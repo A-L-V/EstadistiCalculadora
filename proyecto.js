@@ -21,11 +21,11 @@ function mainA(){
      let varianzaNoAgrupados = document.getElementById("varianzaNoAgrupados")
      let variacionNoAgrupados = document.getElementById("variacionNoAgrupados")
      let desviacionTipicaNoAgrupados = document.getElementById("desviacionTipicaNoAgrupados")
-
-
-     var tipo = document.getElementsByClassName("tipoNoAgrupados")
-     tipo[0].click();
+     let ejecutar = document.getElementById("ejecutarNoAgrupados") 
+     let tipo = document.getElementsByClassName("tipoNoAgrupados")
+     if(!tipo[0].checked)  tipo[0].click();
      var x = 0
+
      tipo[0].addEventListener("click",function(){
           if(tipo[1].checked){
                tipo[1].click();
@@ -38,7 +38,7 @@ function mainA(){
           }
           x = 1;
      })
-     varianzaNoAgrupados[0].addEventListener("click",function(){
+     ejecutar.addEventListener("click",function(){
           datos = procesoDatos();
           
           var readMedia = hallarMediaNoAgrupados(datos);

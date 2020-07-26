@@ -25,13 +25,19 @@ function mainB(){
      var tipo = document.getElementsByClassName("tipo")
 
      var cantTh = document.getElementsByClassName("th").length;
+     if(!tipo[0].checked)  tipo[0].click();
+     var x = 0;
      tipo[0].addEventListener("click",function(){
-          
+          if(tipo[1].checked){
+               tipo[1].click();
+          }
+          x = 0;
      })
      tipo[1].addEventListener("click",function(){
-          if(tipo[0]){
-               
+          if(tipo[0].checked){
+               tipo[0].click();
           }
+          x = 1;
      })
 
      intervalos[0].addEventListener("click",function(){
@@ -57,7 +63,7 @@ function mainB(){
           var writeModa = hallarModa(variables);
           moda.innerHTML = "moda: " + writeModa;
 
-          var writeVarianza = hallarVarianza(variables,writeMedia);
+          var writeVarianza = hallarVarianza(variables,writeMedia,x);
           varianza.innerHTML = " varianza: " + writeVarianza;
 
           var desviationStandar = Math.sqrt(writeVarianza);
@@ -66,11 +72,11 @@ function mainB(){
 
           var coefiVariancion = desviationStandar*100/writeMedia;
           coefiVariancion = (Math.floor(coefiVariancion*100))/100;
-          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion;
+          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion +"%";
      })
 }
 
-function hallarVarianza(variables,media){
+function hallarVarianza(variables,media,x){
      var total = 0;
      for(let i = 0; i < variables.length; i++){
           var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2;
@@ -79,7 +85,7 @@ function hallarVarianza(variables,media){
      }
      
      var n = sumaN(variables);
-     var varianza = total/n;
+     var varianza = total/(n-x);
      varianza = (Math.floor(varianza*100))/100;
      return varianza;
 }
