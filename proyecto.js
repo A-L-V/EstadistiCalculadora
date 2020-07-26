@@ -13,24 +13,49 @@ function noAgrupados(){
 }
 function mainA(){
      var input = document.getElementById("input");
-     let mediaNoAgrupados = document.getElementsByClassName("mediaNoAgrupados");
-     let medianaNoAgrupados = document.getElementsByClassName("medianaNoAgrupados");
-     let modaNoAgrupados = document.getElementsByClassName("modaNoAgrupados");
+     let mediaNoAgrupados = document.getElementById("mediaNoAgrupados");
+     let medianaNoAgrupados = document.getElementById("medianaNoAgrupados");
+     let modaNoAgrupados = document.getElementById("modaNoAgrupados");
      let mostrarArray = document.getElementById("mostrarArray");
+<<<<<<< Updated upstream
      mediaNoAgrupados[0].addEventListener("click",function(){
           datos = procesoDatos();
           hallarMediaNoAgrupados(datos,mediaNoAgrupados);
           mostrar(datos,mostrarArray);
+=======
+     let varianzaNoAgrupados = document.getElementById("varianzaNoAgrupados")
+     let variacionNoAgrupados = document.getElementById("variacionNoAgrupados")
+     let desviacionTipicaNoAgrupados = document.getElementById("desviacionTipicaNoAgrupados")
+
+
+     var tipo = document.getElementsByClassName("tipoNoAgrupados")
+     tipo[0].click();
+     var x = 0
+     tipo[0].addEventListener("click",function(){
+          if(tipo[1].checked){
+               tipo[1].click();
+          }
+          x = 0;
+>>>>>>> Stashed changes
      })
-     medianaNoAgrupados[0].addEventListener("click",function(){
-          datos = procesoDatos();
-          hallarMedianaNoAgrupados(datos,medianaNoAgrupados);
-          mostrar(datos,mostrarArray);
+     tipo[1].addEventListener("click",function(){
+          if(tipo[0].checked){
+               tipo[0].click();
+          }
+          x = 1;
      })
-     modaNoAgrupados[0].addEventListener("click",function(){
+     document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
           datos = procesoDatos();
-          hallarModaNoAgrupados(datos,modaNoAgrupados);
+          
+          var readMedia = hallarMediaNoAgrupados(datos);
+          mediaNoAgrupados.innerHTML = "Media: " + readMedia;
+
+          var readMediana = hallarMedianaNoAgrupados(datos);
+          medianaNoAgrupados.innerHTML = "Mediana: " + readMediana;
+
+          var readModa = hallarModaNoAgrupados(datos);
           alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
+<<<<<<< Updated upstream
           mostrar(datos,mostrarArray);
      })
      document.getElementById("ejecutarNoAgrupados").addEventListener("click",function(){
@@ -39,8 +64,22 @@ function mainA(){
           hallarMedianaNoAgrupados(datos,medianaNoAgrupados);
           hallarModaNoAgrupados(datos,modaNoAgrupados);
           alert("nota: el sistema falta ser corregido en la moda, ya que puede haber varias modas, la moda que es entregada es la primera repetitiva que encuentra el sistema");
+=======
+          modaNoAgrupados.innerHTML = "Moda: " + readModa;
+          
+          var readVarianza = hallarVarianzaNoAgrupados(x,datos,readMedia);
+          varianzaNoAgrupados.innerHTML = "Varianza: " + readVarianza;
+
+          var desviacionTipica = Math.sqrt(readVarianza);
+          desviacionTipica = (Math.floor(desviacionTipica*100))/100;
+          desviacionTipicaNoAgrupados.innerHTML = "Desviacion Tipica: " + desviacionTipica;
+
+          var variacion = desviacionTipica*100/readMedia;
+          variacion = (Math.floor(variacion*100))/100;
+          variacionNoAgrupados.innerHTML = "Coeficiente de Variacion: " + variacion + "%";
+
+>>>>>>> Stashed changes
           mostrar(datos,mostrarArray);
-          alert("correo de contacto: richardalvaradoflores@gmail.com");
      })
      input.addEventListener("onkeypress",soloNumeros);
 }
@@ -53,6 +92,20 @@ function mostrar(a,b){
      b.innerHTML = texto;
 }
 
+<<<<<<< Updated upstream
+=======
+function hallarVarianzaNoAgrupados(x,datos,media){
+     let S = 0;
+     for(let i = 0; i < datos.length;i++){
+          S = ((datos[i] - media)*(datos[i] - media)) + S;
+     }
+     S =  S/(datos.length - x);
+ 
+     S = (Math.floor(S*100))/100;
+     return S;
+}
+
+>>>>>>> Stashed changes
 function soloNumeros(e){
      key = e.keyCode;
      teclado = String.fromCharCode(key);
@@ -88,14 +141,19 @@ function procesoDatos(){
      return datos;
 }
 
-function hallarMediaNoAgrupados(datos,mediaNoAgrupados){
+function hallarMediaNoAgrupados(datos){
      var media =0;
      for(let i = 0; i < datos.length; i++) media = media + datos[i];
      media = media/(datos.length);
+<<<<<<< Updated upstream
      mediaNoAgrupados[1].innerHTML = (Math.floor(media*100))/100;
+=======
+     media = (Math.floor(media*100))/100;
+     return media;
+>>>>>>> Stashed changes
 }
 
-function hallarMedianaNoAgrupados(datos,medianaNoAgrupados){
+function hallarMedianaNoAgrupados(datos){
      var mediana;
      if (datos.length % 2 == 0){
           mediana = (datos[(datos.length/2)-1] + datos[datos.length/2])/2;
@@ -103,20 +161,21 @@ function hallarMedianaNoAgrupados(datos,medianaNoAgrupados){
      else{
           mediana = datos[((datos.length+1)/2)-1];
      }
-     medianaNoAgrupados[1].innerHTML = (Math.floor(mediana*100))/100;
+     mediana = (Math.floor(mediana*100))/100;
+     return mediana
 }
 
-function hallarModaNoAgrupados(datos,modaNoAgrupados){
+function hallarModaNoAgrupados(datos){
      var numero = 0 ,valor = 0,rep = 0;
      for(let i = 0; i < datos.length; i++){
           numero = datos[i];
           if(rep <  verifica(numero,datos)){
                rep = verifica(numero,datos);
                valor= datos[i];
-               
           }
      }
-     modaNoAgrupados[1].innerHTML = (Math.floor(valor*100))/100;
+     moda = (Math.floor(valor*100))/100;
+     return moda;
 }
 
 function verifica(num,datos){

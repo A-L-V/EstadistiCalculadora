@@ -14,6 +14,7 @@ function agrupados(){
 function mainB(){     
      var table = document.getElementById("table");
      var intervalos = document.getElementsByClassName("interval");
+<<<<<<< Updated upstream
      var fila = document.getElementsByClassName("fila");
      var td = document.getElementsByClassName("td");
      var creados = 0;
@@ -26,6 +27,32 @@ function mainB(){
      var columna2 = document.getElementsByClassName("columna2");
      var columna3 = document.getElementsByClassName("columna3");
      var columna4 = document.getElementsByClassName("columna4");
+=======
+     var variables =[]
+     var ejecutar = document.getElementById("ejecutar")
+     var media = document.getElementById("media");
+     var mediana = document.getElementById("mediana");
+     var moda = document.getElementById("moda");
+     var varianza = document.getElementById("varianza");
+     var desviacionStandar = document.getElementById("desviacionStandar");
+     var coeficienteVariacion = document.getElementById("coeficienteVariacion");
+     var tipo = document.getElementsByClassName("tipo")
+     var cantTh = document.getElementsByClassName("th").length;
+     var x = 0;
+     tipo[0].click();
+     tipo[0].addEventListener("click",function(){
+          if(tipo[1].checked){
+               tipo[1].click();
+          }
+          x = 0;
+     })
+     tipo[1].addEventListener("click",function(){
+          if(tipo[0].checked){
+               tipo[0].click();
+          }
+          x = 1;
+     })
+>>>>>>> Stashed changes
 
      intervalos[0].addEventListener("click",function(){
           crearFila();
@@ -48,9 +75,14 @@ function mainB(){
           hallarMediana(columna2[columna2.length-1],columna2,fila,columna0,columna1,mediana);
      })
 
+<<<<<<< Updated upstream
      moda[0].addEventListener("click",function(){
           hallarModa(columna2[columna2.length-1],columna2,fila,columna0,columna1,moda);
      })
+=======
+          var writeVarianza = hallarVarianza(variables,writeMedia,x);
+          varianza.innerHTML = " varianza: " + writeVarianza;
+>>>>>>> Stashed changes
 
      document.getElementById("mc").addEventListener("click",function(){
           hallarMc(columna0,columna3);
@@ -62,6 +94,7 @@ function mainB(){
           hallar_fMc(columna3,columna1,columna4);
      });
 
+<<<<<<< Updated upstream
      document.getElementById("ejecutar").addEventListener("click",function(){
           
           hallarMc(columna0,columna3);
@@ -73,6 +106,26 @@ function mainB(){
           alert("correo de contacto: richardalvaradoflores@gmail.com");
      })
      
+=======
+          var coefiVariancion = desviationStandar*100/writeMedia;
+          coefiVariancion = (Math.floor(coefiVariancion*100))/100;
+          coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion + "%";
+     })
+}
+
+function hallarVarianza(variables,media,x){
+     var total = 0;
+     for(let i = 0; i < variables.length; i++){
+          var mc = (parseFloat(variables[i][1][2].value) + parseFloat(variables[i][1][1].value))/2;
+          var mcXf = ((mc - media)*(mc - media))*parseFloat(variables[i][2][1].value);
+          total = total + mcXf;
+     }
+     
+     var n = sumaN(variables);
+     var varianza = total/(n - x);
+     varianza = (Math.floor(varianza*100))/100;
+     return varianza;
+>>>>>>> Stashed changes
 }
 
 function hallarModa(n,columna2,fila,columna0,columna1,escribirModa){
