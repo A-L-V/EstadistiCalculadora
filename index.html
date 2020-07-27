@@ -14,8 +14,9 @@
                <table id = table>
                     <tr>
                          <th class = "th" id = "primero">  
-                              <input type="button" value= "+ interval" class="interval" id="interval0"/>
-                              <input type="button" value= "- interval" class="interval" id="interval1" /><br/>
+                              <input type="button" value= "+" class="interval" id="interval0"/>
+                              intervalos
+                              <input type="button" value= "-" class="interval" id="interval1" /><br/>
                          </th>
                          <th class = "th">frecuencia</th>
                     </tr>
@@ -26,8 +27,8 @@
                </div>
                <br/>
                <div>
-                    Perceptil
-                    <input type="number" id="perceptilDato" />
+                    Percentil
+                    <input type="number" id="percentilDato" />
                </div>
                <br/>
                <div>
@@ -53,7 +54,7 @@
                     <p id="coeficienteVariacion"></p>
                </div>
                <div> 
-                    <p id="perceptil"></p>
+                    <p id="percentil"></p>
                </div>
                <div> 
                     <p id="coeficienteDeAsimetria"></p>
@@ -61,17 +62,36 @@
           </div>
 
           <div id="divNoAgrupados" style="display: none" >
-               Coloque los numeros,<br/>
-               por ejemplo:1,2,3,4,5 <br/>
-               <textarea type="text" id ="input"  onkeypress="return soloNumeros(event)"></textarea>              
+               <div>
+                    <input type="button" value="Opcion 1" id="opcion1"/>
+                    <input type="button" value="Opcion 2" id="opcion2"/>
+               </div>
+               <div id="opcionTwo" style="display: none;">
+                    <table id = table2>
+                         <tr>
+                              <th class="th2">  
+                                   <input type="button" value= "+" class="interval2" />
+                                   repeticiones
+                                   <input type="button" value= "-" class="interval2" /><br/>
+                              </th>
+                              <th class="th2">valor</th>
+                         </tr>
+                    </table>
+
+               </div>
+               <div id = "opcionOne">
+                    Coloque los numeros,<br/>
+                    por ejemplo:1,2,3,4,5 <br/>
+                    <textarea type="text" id ="input"  onkeypress="return soloNumeros(event)"></textarea>              
+               </div>
                <div>
                     Poblacion <input type="checkbox" class="tipoNoAgrupados"/>
                     Muestra <input type="checkbox" class="tipoNoAgrupados"/>
                </div>
                <br/>
                <div>
-                    Perceptil
-                    <input type="number" id="perceptilDatoNoAgrupado"/>
+                    Percentil
+                    <input type="number" id="percentilDatoNoAgrupado"/>
                </div>
                <br/>
                <div>
@@ -97,7 +117,7 @@
                     <p id="variacionNoAgrupados"></p>
                </div>
                <div> 
-                    <p id="perceptilNoAgrupados"></p>
+                    <p id="percentilNoAgrupados"></p>
                </div>
                <div> 
                     <p id="coeficienteDeAsimetriaNoAgrupados"></p>

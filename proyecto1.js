@@ -23,7 +23,7 @@ function mainB(){
      var desviacionStandar = document.getElementById("desviacionStandar");
      var coeficienteVariacion = document.getElementById("coeficienteVariacion");
      var tipo = document.getElementsByClassName("tipo")
-     var perceptilDato = document.getElementById("perceptilDato");
+     var percentilDato = document.getElementById("percentilDato");
      var cantTh = document.getElementsByClassName("th").length;
      var coefDeAsimetria = document.getElementById("coeficienteDeAsimetria");  
      if(!tipo[0].checked)  tipo[0].click();
@@ -55,7 +55,7 @@ function mainB(){
           }
      });
      intervalos[0].click();
-
+     
      ejecutar.addEventListener("click",function(){
           var writeMedia = hallarMedia(variables);
           media.innerHTML = "media: " + writeMedia;
@@ -77,17 +77,17 @@ function mainB(){
           coefiVariancion = (Math.floor(coefiVariancion*100))/100;
           coeficienteVariacion.innerHTML = "coeficiente de variacion: " + coefiVariancion +"%";
 
-          if(perceptilDato.value > 0 && perceptilDato.value <=100){
-               readPerceptil = hallarPerceptil(variables,perceptilDato.value);
-               var writePerceptil = document.getElementById("perceptil");
-               writePerceptil.innerHTML = "Perceptil(" + perceptilDato.value + "): " + readPerceptil;
+          if(percentilDato.value > 0 && percentilDato.value <=100){
+               readPercentil = hallarPercentil(variables,percentilDato.value);
+               var writePercentil = document.getElementById("percentil");
+               writePercentil.innerHTML = "Percentil(" + percentilDato.value + "): " + readPercentil;
           }
           coefDeAsimetria.innerHTML = "Coeficiente de Asimetria de Pearson: " + (3*(writeMedia- writeMediana)/desviationStandar);
 
      })
 }
 
-function hallarPerceptil(variables,p){
+function hallarPercentil(variables,p){
      var n = sumaN(variables);
      var posicion = p*(n)/100;
      var a = 0;
@@ -110,9 +110,9 @@ function hallarPerceptil(variables,p){
           FiAnterior = x - fi;
      }
      else FiAnterior = 0; 
-     var perceptil = limiteInferior + (amplitud*(posicion - FiAnterior)/fi);
-     perceptil = (Math.floor(perceptil*100)/100);
-     return perceptil;
+     var percentil = limiteInferior + (amplitud*(posicion - FiAnterior)/fi);
+     percentil = (Math.floor(percentil*100)/100);
+     return percentil;
 }
 
 function hallarVarianza(variables,media,x){
@@ -188,7 +188,6 @@ function hallarModa(variables){
      var moda = limiteInferior + (amplitud*(d1/(d1 + d2)));
      moda = (Math.floor(moda*100))/100;
      return moda;
-
 }
 
 function hallarMediana(variables){
